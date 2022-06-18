@@ -56,6 +56,9 @@ virtualbox
 echo "Install oh my bash"
 yes | bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
+echo "Add user to docker group"
+sudo usermod -aG docker $USER
+
 echo "Start services"
-sudo systemctl enable NetworkManager wpa_supplicant gdm snapd.socket
+sudo systemctl enable NetworkManager wpa_supplicant gdm snapd.socket docker
 reboot
