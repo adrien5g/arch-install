@@ -81,7 +81,7 @@ sudo ntpd -u ntp:ntp
 sudo ln -sf /usr/share/zoneinfo/America/Maceio /etc/localtime
 
 ## Start services
-sudo systemctl enable NetworkManager wpa_supplicant gdm snapd.socket docker systemd-networkd
+sudo systemctl enable NetworkManager wpa_supplicant gdm snapd.socket docker systemd-networkd ntpd
 
 ## Reboot system
 reboot
