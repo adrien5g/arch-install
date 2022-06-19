@@ -60,7 +60,6 @@ Sinta-se livre para fazer um fork e fazer suas alterações
 
 #### SystemD enable
 * NetworkManager
-* wpa_supplicant
 * gdm
 * snapd.socket
 * docker
