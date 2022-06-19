@@ -65,6 +65,7 @@ Sinta-se livre para fazer um fork e fazer suas alterações
 * snapd.socket
 * docker
 * systemd-networkd
+* ntpd
 
 #### Links
 
