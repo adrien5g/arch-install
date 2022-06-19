@@ -1,64 +1,87 @@
+# Update repositories
+sudo pacman -Sy
+
 echo "Install yay"
 git clone https://aur.archlinux.org/yay ~/yay
 cd ~/yay
 yes | makepkg -si
 
-echo "Install yay packages"
-yay -S  --noconfirm \
-visual-studio-code-bin \
-ocs-url \
-chrome-gnome-shell \
-spotify
-
-echo "Setup snap"
-sudo ln -s /var/lib/snapd/snap /snap
-
-echo "Install utils"
-sudo pacman -S  --noconfirm \
+# Install extras
+sudo pacman -S --noconfirm \
 xdg-user-dirs \
 curl \
 wget \
-htop \
 ttf-fira-code \
 noto-fonts \
 noto-fonts-emoji \
 xorg \
-firefox \
-discord
+linux-headers \
+ntp \
+gnome-menus \
+networkmanager-openvpn
 
-echo "Install GUI"
-sudo pacman -S --noconfirm\
+yay -S --noconfirm \
+ocs-url
+
+# Install interface
+sudo pacman -S --noconfirm \
 gnome-shell \
 gnome-control-center \
 nautilus \
 gnome-tweaks \
-gnome-terminal \
-gedit \
 gnome-calculator \
 gdm \
-gnome-menus
 
-echo "Install python setup"
-sudo pacman -S   --noconfirm\
+yay -S --noconfirm \
+gnome-console \
+gnome-text-editor
+
+# Prograns
+sudo pacman -S --noconfirm \
+firefox \
+virtualbox \
+terraform \
+ansible \
+docker \
+vagrant \
+discord
+
+yay -S --noconfirm \
+visual-studio-code-bin \
+spotify \
+snapd
+
+# Python development
+sudo pacman -S --noconfirm \
 python3 \
 python-pip \
 poetry \
 pyenv
 
-echo "Install devops tools"
-sudo pacman -S   --noconfirm\
-ansible \
-vagrant \
-terraform \
-docker \
-virtualbox
+# Configuration
+## setup snap
+sudo ln -s /var/lib/snapd/snap /snap
 
-echo "Install oh my bash"
-yes | bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+## Install oh my bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-echo "Add user to docker group"
+## Add user to docker group
 sudo usermod -aG docker $USER
 
-echo "Start services"
-sudo systemctl enable NetworkManager wpa_supplicant gdm snapd.socket docker
+## Load module
+sudo modprobe vboxdrv
+
+## Create home folders
+xdg-user-dirs-Update
+
+## Config NTP (Brasil)
+sudo rm -rf /etc/ntp.conf
+sudo mv ntp.conf /etc/ntp.conf
+sudo ntpd -u ntp:ntp
+sudo ln -sf /usr/share/zoneinfo/America/Maceio /etc/localtime
+
+## Start services
+sudo systemctl enable NetworkManager wpa_supplicant gdm snapd.socket docker systemd-networkd
+
+## Reboot system
 reboot
