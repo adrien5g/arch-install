@@ -1,10 +1,11 @@
 # Update repositories
 sudo pacman -Sy
 
-echo "Install yay"
-git clone https://aur.archlinux.org/yay ~/yay
-cd ~/yay
+# Install yay
+git clone https://aur.archlinux.org/yay yay
+cd yay
 yes | makepkg -si
+cd ..
 
 # Install extras
 sudo pacman -S --noconfirm \
@@ -18,7 +19,8 @@ xorg \
 linux-headers \
 ntp \
 gnome-menus \
-networkmanager-openvpn
+networkmanager-openvpn \
+chrome-gnome-shell
 
 yay -S --noconfirm \
 ocs-url
