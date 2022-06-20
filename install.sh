@@ -64,9 +64,6 @@ pyenv
 ## setup snap
 sudo ln -s /var/lib/snapd/snap /snap
 
-## Install oh my bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
 ## Add user to docker group
 sudo usermod -aG docker $USER
 
@@ -84,6 +81,9 @@ sudo ln -sf /usr/share/zoneinfo/America/Maceio /etc/localtime
 
 ## Start services
 sudo systemctl enable NetworkManager gdm snapd.socket docker systemd-networkd ntpd
+
+## Install oh my bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
 ## Reboot system
 reboot
